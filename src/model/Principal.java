@@ -1,5 +1,10 @@
 package model;
 
+import dao.*;
+
+import java.sql.Date;
+import java.sql.Time;
+
 import javax.swing.JOptionPane;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -7,8 +12,9 @@ import java.util.TimeZone;
 public class Principal {
 
     public static void main(String[] args) {
-        Funcionario f = new Funcionario("Felipe", "dasd", "4302", true);
-        
+        Funcionario f = new Funcionario("Felipe", "São Sebastião", "4302", true);
+        FuncionarioDAO fDAO = new FuncionarioDAO();
+        fDAO.adicionar(criarFuncionario(f));
     }
     //criar cinema
     public static Cinema criarCinema(Funcionario f) {
@@ -82,16 +88,9 @@ public class Principal {
         } else if (a == JOptionPane.YES_OPTION) {
             normal = false;
         }
-        int horas = Integer.parseInt(JOptionPane.showInputDialog("Que horas começa a sessão?"));
-        int minutos = Integer.parseInt(JOptionPane.showInputDialog("E quais são os minutos que começa a sessão"));
-        int mes = Integer.parseInt(JOptionPane.showInputDialog("Em qual mês?"));
-        int qntdDia = Integer.parseInt(JOptionPane.showInputDialog("Quantos dias serão passados a sessão?"));
-        int[] dias = new int[qntdDia];
-        for (int i = 0; i < qntdDia; i++) {
-            int aux = qntdDia;
-            dias[i] = Integer.parseInt(JOptionPane.showInputDialog("Quais dias passarão a sessão?(faltam " + aux + " dia(s))"));
-            aux--;
-        }
+        Date dia = new Date(Integer.parseInt(JOptionPane.showInputDialog("Qual o ano da sessão?")), Integer.parseInt(JOptionPane.showInputDialog("Qual o mes da sessão?")), Integer.parseInt(JOptionPane.showInputDialog("Qual o dia da sessão?")));
+        Time horario = new Time(Integer.parseInt(JOptionPane.showInputDialog("Que horas começa a sessão?")), Integer.parseInt(JOptionPane.showInputDialog("E quantos minutos?")), 0);
+        
         int ingressoDisp = 0, coluna = 0, fileira = 0;
         int aux = JOptionPane.showOptionDialog(null, "A quantidade de ingressos será igual ao quantidade de cadeiras?", "MENU", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, null);
         if (aux == JOptionPane.NO_OPTION) {
@@ -111,7 +110,7 @@ public class Principal {
         } else if (aux == JOptionPane.YES_OPTION) {
             ingressoDisp = sala.getQntdCadeira();
         }
-        Sessao s = new Sessao(preco, normal, numSala, filme, horas, minutos, dias, mes, ingressoDisp, coluna, fileira);
+        Sessao s = new Sessao(preco, normal, numSala, filme, horario, dia, ingressoDisp, coluna, fileira);
         return s;
     }
     //criar funcionário
@@ -145,51 +144,50 @@ public class Principal {
     }
     //comprar ingresso
     public static Ingresso comprarIngresso(Funcionario f, Cliente c, Sessao s) {
-        double preco = 0.0;
-        if (c.isEstudante()) {
-            preco = s.getPreco() / 2;
-        } else {
-            preco = s.getPreco();
-        }
-        String tipo = "";
-        if (s.isNormal()) {
-            tipo = "Normal";
-        } else {
-            tipo = "3D";
-        }
-        String aux = "";
-        for (int i = 0; i < s.getLength(); i++) {
-            aux += "" + s.getDia()[i] + "/" + s.getMes() + "\n";
-        }
-        int dia = Integer.parseInt(JOptionPane.showInputDialog(null, "Qual o dia desejado:\n" + aux));
-        int mes = s.getMes();
-        int colunaA = Integer.parseInt(JOptionPane.showInputDialog("Qual a coluna desejada?")), coluna = 0;
-        if(colunaA < s.getColuna()){
-            coluna = colunaA;
-        }else{
-            JOptionPane.showMessageDialog(null, "Não existe essa coluna!");
-        }
+        int qntdIngressos = Integer.parseInt(JOptionPane.showInputDialog("Quantos ingressos serão comprados?"));
+        do{
+            double preco = 0.0;
+            if (c.isEstudante()) {
+                preco = s.getPreco() / 2;
+            } else {
+                preco = s.getPreco();
+            }
+            String tipo = "";
+            if (s.isNormal()) {
+                tipo = "Normal";
+            } else {
+                tipo = "3D";
+            }
+            int colunaA = Integer.parseInt(JOptionPane.showInputDialog("Qual a coluna desejada?")), coluna = 0;
+            if(colunaA < s.getColuna()){
+                coluna = colunaA;
+            }else{
+                JOptionPane.showMessageDialog(null, "Não existe essa coluna!");
+            }
         
-        String fileiraS = JOptionPane.showInputDialog("Qual a fileira desejada?");
-        char fileiraA = fileiraS.charAt(0), fileira = ' ';
-        if(fileiraA < s.getFileira()){
-            fileira = fileiraA;
-        }else{
-            JOptionPane.showMessageDialog(null, "Não existe essa fileira!");
-        }
-        
-        String filme = s.getFilme();
-        String sessao = "" + s.getIdSessao();
-        GregorianCalendar gc = new GregorianCalendar();
-        int horaIngresso = (int) gc.get(gc.HOUR);
-        int minutosIngresso = (int) gc.get(gc.MINUTE);
-        Ingresso i = new Ingresso(preco, tipo, dia, mes, coluna, fileira, filme, sessao, horaIngresso, minutosIngresso);
-        return i;
+            String fileiraS = JOptionPane.showInputDialog("Qual a fileira desejada?");
+            char fileiraA = fileiraS.charAt(0), fileira = ' ';
+            if(fileiraA < s.getFileira()){
+                fileira = fileiraA;
+            }else{
+                JOptionPane.showMessageDialog(null, "Não existe essa fileira!");
+            }
+            Date dia = s.getDia();
+            String filme = s.getFilme();
+            String sessao = "" + s.getIdSessao();
+            GregorianCalendar gc = new GregorianCalendar();
+            Time horarioCompra = new Time(gc.HOUR, gc.MINUTE, 0);
+            Date diaCompra = new Date(gc.YEAR, gc.MONTH, (int) gc.DAY_OF_MONTH);
+
+            Ingresso i = new Ingresso(preco, tipo, dia, coluna, fileira, filme, sessao, horarioCompra, diaCompra);
+            qntdIngressos = qntdIngressos - 1;
+            return i;
+        }while(qntdIngressos!=0);
     }
     //regustrando venda
     public static Venda registrarVenda(Ingresso i, Funcionario f) {
-        String horasCompra = "" + i.getHoraCompra() + ":" + i.getMinutosCompra();
-        Venda v = new Venda(f.getIdMat(), i.getPreco(), i.getTipo(), i.getDia(), i.getMes(), i.getHoras(), i.getMinutos(), horasCompra);
+        String horasCompra = "" + i.getHorarioCompra();
+        Venda v = new Venda(f.getIdMat(), i.getPreco(), i.getTipo(), i.getDiaCompra(), i.getHorarioCompra() );
         return v;
     }
 }

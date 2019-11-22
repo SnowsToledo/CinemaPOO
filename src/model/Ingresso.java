@@ -1,5 +1,8 @@
 package model;
 
+import java.sql.Date;
+import java.sql.Time;
+
 public class Ingresso {
     private double preco;
     private String tipo;
@@ -7,15 +10,12 @@ public class Ingresso {
     private char fileira;
     private String filme;
     private String sessao;
-    private int dia;
-    private int mes;
-    private int horas;
-    private int minutos;
-    private int horaCompra;
-    private int minutosCompra;
-    private String horario = new String(horas+":"+minutos);
+    private Date dia;
+    private Date diaCompra;
+    private Time horario;
+    private Time horarioCompra;
 
-    public Ingresso(double preco, String tipo, int dia, int mes, int coluna, char fileira, String filme, String sessao, int horaCompra, int minutosCompra) {
+    public Ingresso(double preco, String tipo, Date dia, int coluna, char fileira, String filme, String sessao, Time horarioCompra, Date diaCompra) {
         this.preco = preco;
         this.tipo = tipo;
         this.coluna = coluna;
@@ -23,9 +23,8 @@ public class Ingresso {
         this.filme = filme;
         this.sessao = sessao;
         this.dia = dia;
-        this.mes = mes;
-        this.horaCompra = horaCompra;
-        this.minutosCompra = minutosCompra;
+        this.horarioCompra = horarioCompra;
+        this.diaCompra = diaCompra;
     }
 
     public String getSessao() {
@@ -36,36 +35,20 @@ public class Ingresso {
         this.sessao = sessao;
     }
 
-    public int getHoraCompra() {
-        return horaCompra;
-    }
-
-    public void setHoraCompra(int horaCompra) {
-        this.horaCompra = horaCompra;
-    }
-
-    public int getMinutosCompra() {
-        return minutosCompra;
-    }
-
-    public void setMinutosCompra(int minutosCompra) {
-        this.minutosCompra = minutosCompra;
-    }
-
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
-
     public double getPreco() {
         return preco;
     }
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public Date getDiaCompra() {
+        return diaCompra;
+    }
+
+    public void setDiaCompra(Date diaCompra) {
+        this.diaCompra = diaCompra;
     }
 
     public String getTipo() {
@@ -100,36 +83,30 @@ public class Ingresso {
         this.filme = filme;
     }
 
-    public int getDia() {
+    public Date getDia() {
         return dia;
     }
 
-    public void setDia(int dia) {
+    public void setDia(Date dia) {
         this.dia = dia;
     }
 
-    public int getMes() {
-        return mes;
+    public Time getHorario() {
+        return horario;
     }
 
-    public void setMes(int mes) {
-        this.mes = mes;
+    public void setHorario(Time horario) {
+        this.horario = horario;
     }
 
-    public int getHoras() {
-        return horas;
+    public Time getHorarioCompra() {
+        return horarioCompra;
     }
 
-    public void setHoras(int horas) {
-        this.horas = horas;
+    public void setHorarioCompra(Time horarioCompra) {
+        this.horarioCompra = horarioCompra;
     }
 
-    public int getMinutos() {
-        return minutos;
-    }
 
-    public void setMinutos(int minutos) {
-        this.minutos = minutos;
-    }
     
 }

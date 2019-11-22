@@ -1,35 +1,33 @@
 package model;
 
+import java.sql.Date;
+import java.sql.Time;
+
 public class Sessao {
 
     private int idSessao;
     private double preco;
     private boolean normal;
-    private int horas;
-    private int minutos;
     private String filme;
-    private String horario = new String(horas + ":" + minutos);
+    private Time horario;
     private int numSala;
     private int ingressosDisp;
+    private Date dia;
     private int coluna;
     private int fileira;
-    private int[] dias;
-    private int mes;
 
 
     
-    public Sessao(double preco, boolean normal, int numSala, String filme, int horas,int minutos, int[] dias, int mes,  int ingressosDisp, int coluna, int fileira) {
+    public Sessao(double preco, boolean normal, int numSala, String filme, Time horario, Date dia, int ingressosDisp, int coluna, int fileira) {
         this.preco = preco;
         this.normal = normal;
         this.numSala = numSala;
         this.filme = filme;
-        this.horas = horas;
-        this.minutos = minutos;
+        this.horario = horario;
+        this.dia = dia;
         this.ingressosDisp = ingressosDisp;
         this.coluna = coluna;
         this.fileira = fileira;
-        this.dias = dias;
-        this.mes = mes;
     }
     
     public int getColuna() {
@@ -48,12 +46,12 @@ public class Sessao {
         this.fileira = fileira;
     }
 
-    public int[] getDias() {
-        return dias;
+    public Date getDia() {
+        return dia;
     }
 
-    public void setDias(int[] dias) {
-        this.dias = dias;
+    public void setDia(Date dia) {
+        this.dia = dia;
     }
     public boolean isNormal() {
         return normal;
@@ -75,27 +73,11 @@ public class Sessao {
         return idSessao;
     }
 
-    public int getHoras() {
-        return horas;
-    }
-
-    public void setHoras(int horas) {
-        this.horas = horas;
-    }
-
-    public int getMinutos() {
-        return minutos;
-    }
-
-    public void setMinutos(int minutos) {
-        this.minutos = minutos;
-    }
-
-    public String getHorario() {
+    public Time getHorario() {
         return horario;
     }
 
-    public void setHorario(String horario) {
+    public void setHorario(Time horario) {
         this.horario = horario;
     }
 
@@ -105,25 +87,6 @@ public class Sessao {
 
     public void setIngressosDisp(int ingressosDisp) {
         this.ingressosDisp = ingressosDisp;
-    }
-
-    public int[] getDia() {
-        return dias;
-    }
-
-    public void setDia(int[] dias) {
-        this.dias = dias;
-    }
-    public int getLength(){
-        return dias.length;
-    }
-
-    public int getMes() {
-        return mes;
-    }
-
-    public void setMes(int mes) {
-        this.mes = mes;
     }
 
     public String getFilme() {

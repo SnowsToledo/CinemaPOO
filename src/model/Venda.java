@@ -5,35 +5,45 @@
  */
 package model;
 
+import java.sql.Date;
+import java.sql.Time;
+
 public class Venda {
     private int idVenda;
     private int idFunc;
     private double preco;
     private String tipoIngresso;
-    private int dia;
-    private int mes;
-    private int horas;
-    private int minutos;
-    private String horario = new String(horas+":"+minutos);
-    private String horasCompra;
+    private Date dataCompra;
+    private Time horarioCompra;
+    
 
-    public Venda(int idFunc, double preco, String tipoIngresso, int dia, int mes, int horas, int minutos, String horasCompra) {
+    public Venda(int idFunc, double preco, String tipoIngresso, Date dataCompra, Time horarioCompra) {
         this.idFunc = idFunc;
         this.preco = preco;
         this.tipoIngresso = tipoIngresso;
-        this.dia = dia;
-        this.mes = mes;
-        this.horas = horas;
-        this.minutos = minutos;
-        this.horasCompra = horasCompra; 
+        this.dataCompra = dataCompra;
+        this.horarioCompra = horarioCompra;
+        
     }
 
-    public String getHorasCompra() {
-        return horasCompra;
+    public int getIdVenda() {
+        return idVenda;
     }
 
-    public void setHorasCompra(String horasCompra) {
-        this.horasCompra = horasCompra;
+    public Date getDataCompra() {
+        return dataCompra;
+    }
+
+    public void setDataCompra(Date dataCompra) {
+        this.dataCompra = dataCompra;
+    }
+
+    public Time getHorarioCompra() {
+        return horarioCompra;
+    }
+
+    public void setHorarioCompra(Time horarioCompra) {
+        this.horarioCompra = horarioCompra;
     }
 
     public int getIdFunc() {
@@ -55,47 +65,5 @@ public class Venda {
     public void setTipoIngresso(String tipoIngresso) {
         this.tipoIngresso = tipoIngresso;
     }
-
-    public int getDia() {
-        return dia;
-    }
-
-    public void setDia(int dia) {
-        this.dia = dia;
-    }
-
-    public int getMes() {
-        return mes;
-    }
-
-    public void setMes(int mes) {
-        this.mes = mes;
-    }
-
-    public int getHoras() {
-        return horas;
-    }
-
-    public void setHoras(int horas) {
-        this.horas = horas;
-    }
-
-    public int getMinutos() {
-        return minutos;
-    }
-
-    public void setMinutos(int minutos) {
-        this.minutos = minutos;
-    }
-
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
-
-
-    
+   
 }

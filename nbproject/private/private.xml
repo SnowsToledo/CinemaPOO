@@ -5,12 +5,14 @@
         <group>
             <file>file:/C:/Users/felip/Documents/NetBeansProjects/CinemaLPOOBD/src/model/Cliente.java</file>
             <file>file:/C:/Users/felip/Documents/NetBeansProjects/CinemaLPOOBD/src/model/Ingresso.java</file>
-            <file>file:/C:/Users/felip/Documents/NetBeansProjects/CinemaLPOOBD/src/model/Conexao.java</file>
+            <file>file:/C:/Users/felip/Documents/NetBeansProjects/CinemaLPOOBD/src/dao/Conexao.java</file>
             <file>file:/C:/Users/felip/Documents/NetBeansProjects/CinemaLPOOBD/src/model/Sala.java</file>
             <file>file:/C:/Users/felip/Documents/NetBeansProjects/CinemaLPOOBD/src/model/Cinema.java</file>
             <file>file:/C:/Users/felip/Documents/NetBeansProjects/CinemaLPOOBD/src/model/Funcionario.java</file>
+            <file>file:/C:/Users/felip/Documents/NetBeansProjects/CinemaLPOOBD/src/dao/FuncionarioDAO.java</file>
             <file>file:/C:/Users/felip/Documents/NetBeansProjects/CinemaLPOOBD/src/model/Principal.java</file>
             <file>file:/C:/Users/felip/Documents/NetBeansProjects/CinemaLPOOBD/src/model/Venda.java</file>
+            <file>file:/C:/Users/felip/Documents/NetBeansProjects/CinemaLPOOBD/src/dao/SessaoDAO.java</file>
             <file>file:/C:/Users/felip/Documents/NetBeansProjects/CinemaLPOOBD/src/model/Sessao.java</file>
             <file>file:/C:/Users/felip/Documents/NetBeansProjects/CinemaLPOOBD/src/model/Filme.java</file>
         </group>
